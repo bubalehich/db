@@ -9,11 +9,17 @@ order by seats desc limit 3;
 
 
 --Вывести код,модель самолета и места не эконом класса для самолета 'Аэробус A321-200' с сортировкой по местам
+select ad.aircraft_code, model, seats.*
+from seats
+join aircrafts_data ad on ad.aircraft_code = seats.aircraft_code
+where fare_conditions <> 'Economy'
+and model->>'ru' like '%Аэробус A321-200%';
+
+
 
 --Вывести города в которых больше 1 аэропорта ( код аэропорта, аэропорт, город)
 
 -- Найти ближайший вылетающий рейс из Екатеринбурга в Москву, на который еще не завершилась регистрация
-
 
 --Вывести самый дешевый и дорогой билет и стоимость ( в одном результирующем ответе)
     (SELECT * FROM ticket_flights ORDER BY amount DESC LIMIT 1)
